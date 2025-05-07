@@ -1,0 +1,22 @@
+name: Build Spigot Plugin
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Java
+        uses: actions/setup-java@v2
+        with:
+          java-version: '17'
+
+      - name: Build with Maven
+        run: mvn clean package
+
+      - uses: actions/upload-artifact@v2
+        with:
+          name: myplugin
+          path: target/*.jar
